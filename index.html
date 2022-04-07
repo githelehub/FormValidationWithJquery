@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous">
+  </script>
+
+  <style>
+    
+    body{
+      font-size: 120%;
+      width: 50%;
+      text-align: center; 
+    }
+
+    #wrappper{
+      width: 1000px;
+      margin: 0 auto;
+
+    }
+
+    input{
+      padding: 10px;
+      font-size: 20px;
+      border-radius: 5px;
+      border: 1px solid grey;
+      width: 50%;
+    }
+
+    label{
+      display: inline-block;
+      width: 200px;
+    }
+
+    .form-group{
+      margin-bottom: 15px;
+    }
+
+    button{
+      background-color: #4caf50;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      margin-top: 20px;
+    }
+
+    #error {
+      color: red;
+      text-align: left;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="wrapper">
+
+    <div id="error">
+
+    </div>
+    <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" placeholder="mail adresinizi giriniz.">
+    </div>
+
+    <div class="form-group">
+    <label for="phone">Telefon</label>
+    <input type="text" name="phone" id="phone" placeholder="telefon numaranızı giriniz.">
+    </div>
+
+    <div class="form-group">
+    <label for="password">Parola</label>
+    <input type="text" name="password" id="password" placeholder="parolanızı giriniz.">
+    </div>
+
+    <div class="form-group">
+    <label for="repassword">Parola Tekrar</label>
+    <input type="text" name="repassword" id="repassword" placeholder="parolanızı tekrar giriniz giriniz.">
+    </div>
+    <button id="btn">Kaydet</button>
+    
+  </div>
+
+  <script>
+
+    $(function(){
+
+      function isEmail(email){
+        let pattern = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+        return pattern.test(email)
+      }
+
+      $("#btn").click(function(){
+
+        let errorMessage = "";
+        $("#error").html("");
+
+        if($("#email").val() == ""){
+          errorMessage += "<p> E-mail alanını doldurmanız gerekmektedir. </p>"
+        }
+
+        if (isEmail($("#email").val() == false)){
+          errorMessage += "<p> Email alanına uygun karakterler girilmedi."
+        }
+
+        if($.isNumeric($("#phone").val()) == false){
+          errorMessage += "<p> Telefon alanını doldurmanız gerekmektedir. </p>"
+        }
+
+        if($("#password").val() == ""){
+          errorMessage += "<p> Parola alanını doldurmanız gerekmektedir. </p>"
+        }
+
+        if($("#password").val() != $("#repassword").val()){
+          errorMessage += "<p> Parola alanları eşleşmemektedir. </p>"
+        }
+      })
+
+
+
+      if(errorMessage != ""){
+        $("#error").html(errorMessage);
+      }
+
+    })
+
+  </script>
+</body>
+</html>
